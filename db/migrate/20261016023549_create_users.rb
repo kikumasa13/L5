@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[8.1]
     create_table :users do |t|
       t.string :uid
       t.string :pass
-
+      t.integer :age
       t.timestamps
     end
   end
