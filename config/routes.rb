@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  root "users#index"
+  root "top#main"
+  post "top/login"
+  get  "top/logout"
   resources :users, only: [:index, :new, :create, :destroy]
 end

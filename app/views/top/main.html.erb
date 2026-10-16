@@ -1,0 +1,11 @@
+<h1>つぶやきアプリ</h1>
+<p style="color:red"><%= alert %></p>
+
+<% if session[:login_uid] %>
+  <%= session[:login_uid] %> さんログイン中 |
+  <%= link_to "ログアウト", top_logout_path %>
+<% else %>
+  <%= render "login_form" %>
+  <%= link_to "ユーザ登録", new_user_path %>
+<% end %>
+<hr>
