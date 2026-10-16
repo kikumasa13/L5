@@ -1,5 +1,6 @@
 class TopController < ApplicationController
   def main
+    @tweets = Tweet.all.order(created_at: :desc)
   end
 
   def login

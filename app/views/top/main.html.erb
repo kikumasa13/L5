@@ -4,8 +4,16 @@
 <% if session[:login_uid] %>
   <%= session[:login_uid] %> さんログイン中 |
   <%= link_to "ログアウト", top_logout_path %>
+  <%= form_with model: Tweet.new do |f| %>
+    <%= f.text_field :message %>
+    <%= f.submit "ツイート" %>
+  <% end %>
 <% else %>
   <%= render "login_form" %>
   <%= link_to "ユーザ登録", new_user_path %>
 <% end %>
 <hr>
+
+<% @tweets.each do |e| %>
+  <p><%= e.user.uid %>：<%= e.message %></p>
+<% end %>

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   post "top/login"
   get  "top/logout"
   resources :users, only: [:index, :new, :create, :destroy]
+  resources :tweets, only: [:create]
 end
