@@ -1,0 +1,20 @@
+<h1><%= @user.uid %> さんのページ</h1>
+<p style="color:green"><%= notice %></p>
+
+<h3>プロフィール</h3>
+<% if @user.profile %>
+  <p><%= @user.profile.message %></p>
+<% else %>
+  <p>（プロフィール未登録）</p>
+<% end %>
+<% if session[:login_uid] == @user.uid %>
+  <%= link_to "プロフィール編集", edit_profile_path %>
+<% end %>
+
+<h3>ツイート（<%= @user.tweets.count %>件）</h3>
+<% @user.tweets.order(created_at: :desc).each do |t| %>
+  <p><%= t.message %>（いいね <%= t.likes.count %>）</p>
+<% end %>
+
+<%= link_to "ユーザ一覧", users_path %> |
+<%= link_to "トップへ", root_path %>
