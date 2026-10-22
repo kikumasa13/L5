@@ -1,3 +1,4 @@
+cat > app/views/top/main.html.erb <<'EOF'
 <h1>つぶやきアプリ</h1>
 <p style="color:red"><%= alert %></p>
 
@@ -23,4 +24,9 @@
       <% if e.like_users.exists?(uid: session[:login_uid]) %>
         <%= link_to "いいね削除", like_path(e), data: { turbo_method: :delete } %>
       <% else %>
-        <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post }
+        <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post } %>
+      <% end %>
+    <% end %>
+  </p>
+<% end %>
+EOF
