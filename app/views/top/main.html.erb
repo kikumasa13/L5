@@ -3,6 +3,8 @@
 
 <% if session[:login_uid] %>
   <%= session[:login_uid] %> さんログイン中 |
+  <%= link_to "マイページ", user_path(User.find_by(uid: session[:login_uid])) %> |
+  <%= link_to "プロフィール編集", edit_profile_path %> |
   <%= link_to "ログアウト", top_logout_path %>
   <%= form_with model: Tweet.new do |f| %>
     <%= f.text_field :message %>
@@ -16,13 +18,9 @@
 
 <% @tweets.each do |e| %>
   <p>
-    <%= e.user.uid %>：<%= e.message %>（いいね <%= e.likes.count %>）
+    <%= link_to e.user.uid, user_path(e.user) %>：<%= e.message %>（いいね <%= e.likes.count %>）
     <% if session[:login_uid] %>
       <% if e.like_users.exists?(uid: session[:login_uid]) %>
         <%= link_to "いいね削除", like_path(e), data: { turbo_method: :delete } %>
       <% else %>
-        <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post } %>
-      <% end %>
-    <% end %>
-  </p>
-<% end %>
+        <%= link_to "いいね", likes_path(tweet_id: e.id), data: { turbo_method: :post }
